@@ -107,6 +107,36 @@ describe('Testare Masina Service',()=>{
 
         });
 
+        test('Create fail | an not a number', async()=>{
+
+            MasinaRipo.mockImplementation(()=>{
+                return{
+                    create:()=>{
+                        return Promise.resolve('success');
+                    }
+                }
+            })
+            let obj = {id: 1,marca:'test',an:'1',pret:1};
+            let service = new MasinaService();
+            await expect(service.Screate(obj)).rejects.toMatch("An must be a number!");
+
+        });
+
+        test('Create fail | pret not a number', async()=>{
+
+            MasinaRipo.mockImplementation(()=>{
+                return{
+                    create:()=>{
+                        return Promise.resolve('success');
+                    }
+                }
+            })
+            let obj = {id: 1,marca:'test',an:1,pret:'1'};
+            let service = new MasinaService();
+            await expect(service.Screate(obj)).rejects.toMatch("Pret must be a number!");
+
+        });
+
         test('Create fail', async()=>{
             MasinaRipo.mockImplementation(()=>{
                 return{
@@ -177,6 +207,34 @@ describe('Testare Masina Service',()=>{
             let obj = {id:'1',marca: 'test', an:1, pret: 1};
             let service = new MasinaService();
             await expect(service.Supdate(obj)).rejects.toMatch('ID must be a number!');
+        });
+
+        test("Update fail | An not a number",async()=>{
+            MasinaRipo.mockImplementation(()=>{
+                return{
+                    update:()=>{
+                        return Promise.resolve('');
+                    }
+                }
+            });
+
+            let obj = {id:1, marca: 'test', an:'1', pret: 1};
+            let service = new MasinaService();
+            await expect(service.Supdate(obj)).rejects.toMatch('An must be a number!');
+        });
+
+        test("Update fail | Pret not a number",async()=>{
+            MasinaRipo.mockImplementation(()=>{
+                return{
+                    update:()=>{
+                        return Promise.resolve('');
+                    }
+                }
+            });
+
+            let obj = {id:1, marca: 'test', an:1, pret: '1'};
+            let service = new MasinaService();
+            await expect(service.Supdate(obj)).rejects.toMatch('Pret must be a number!');
         });
 
         test("Update fail",async()=>{

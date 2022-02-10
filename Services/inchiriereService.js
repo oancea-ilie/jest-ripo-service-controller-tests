@@ -35,8 +35,8 @@ export  default  class  InchiriereService{
                 return Promise.reject('ID must be a number!');
             }
 
-            if(typeof obj.masina_id != 'number' || typeof obj.masina_id != 'number' || typeof obj.persoana_id !='number'
-            || typeof obj.perioada !='number'){
+            if(typeof obj.masina_id != 'number' || typeof obj.persoana_id !='number' || typeof obj.perioada !='number'){
+
                 if(typeof obj.masina_id != 'number'){
                     return Promise.reject('Masina ID must be a number!');
                 }
@@ -69,8 +69,8 @@ export  default  class  InchiriereService{
                 return Promise.reject('ID must be a number!');
             }
 
-            if(typeof obj.masina_id != 'number' || typeof obj.masina_id != 'number' || typeof obj.persoana_id !='number'
-            || typeof obj.perioada !='number'){
+            if(typeof obj.masina_id != 'number' || typeof obj.persoana_id !='number' || typeof obj.perioada !='number'){
+  
                 if(typeof obj.masina_id != 'number'){
                     return Promise.reject('Masina ID must be a number!');
                 }

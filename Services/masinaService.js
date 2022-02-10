@@ -32,6 +32,15 @@ export  default  class  MasinaService{
                 return Promise.reject('ID must be a number!');
             }
 
+            if(typeof obj.an != 'number' || typeof obj.pret != 'number'){
+                if(typeof obj.an != 'number'){
+                    return Promise.reject('An must be a number!');
+                }
+                if(typeof obj.pret != 'number'){
+                    return Promise.reject('Pret must be a number!');
+                }
+            }
+
             let rez = await this.control.create(obj);
             return rez;
 
@@ -50,6 +59,15 @@ export  default  class  MasinaService{
             }
             if(typeof obj.id != "number"){
                 return Promise.reject('ID must be a number!');
+            }
+
+            if(typeof obj.an != 'number' || typeof obj.pret != 'number'){
+                if(typeof obj.an != 'number'){
+                    return Promise.reject('An must be a number!');
+                }
+                if(typeof obj.pret != 'number'){
+                    return Promise.reject('Pret must be a number!');
+                }
             }
 
             let rez = await this.control.update(obj.id,obj);
