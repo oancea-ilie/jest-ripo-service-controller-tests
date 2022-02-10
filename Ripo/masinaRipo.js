@@ -21,6 +21,19 @@ export default  class MasinaRipo{
 
         })
     }
+    
+    getById= async(id)=>{
+        let all = await this.getAll();
+        if(all){
+            for(let p of all){
+                if(p.id == id){
+                    return p;
+                }
+            }
+
+            return 'Nu exista Masina cu acest id! ';
+        }
+    }
 
     create= async(obj)=>{
         let arr = await this.getAll();
@@ -44,7 +57,6 @@ export default  class MasinaRipo{
                     p.marca = newObj.marca;
                     p.an = newObj.an;
                     p.pret = newObj.pret;
-
                 }
             }
 
@@ -69,6 +81,11 @@ export default  class MasinaRipo{
         }
     }
 
+    purge= async()=>{
+        this.list = [];
+        await this.save(this.list);
+    }
+
     display = async()=>{
         let arr = await this.getAll();
 
@@ -82,7 +99,6 @@ export default  class MasinaRipo{
     }
 
     save=(data)=>{
-
         return new Promise((resolve,reject)=>{
 
             fs.writeFile('./DB/masinaDB.json',JSON.stringify(data,null,2),(err)=>{

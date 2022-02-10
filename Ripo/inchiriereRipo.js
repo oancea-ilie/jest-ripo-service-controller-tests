@@ -7,7 +7,7 @@ export default  class InchiriereRipo{
 
     getAll=()=>{
         return new Promise((resolve,reject)=>{
-            fs.readFile('../DB/inchiriereDB.json','utf8',(err,data)=>{
+            fs.readFile('./DB/inchiriereDB.json','utf8',(err,data)=>{
                 if(err){
                     reject(err);
                 }else{
@@ -17,6 +17,18 @@ export default  class InchiriereRipo{
                 }
             })
         })
+    }
+
+    getById= async(id)=>{
+        let all = await this.getAll();
+        if(all){
+            for(let p of all){
+                if(p.id == id){
+                    return p;
+                }
+            }
+            return 'Nu exista Inchiriere cu acest id! ';
+        }
     }
 
     create= async(obj)=>{
@@ -47,6 +59,11 @@ export default  class InchiriereRipo{
         }
     }
 
+    purge= async()=>{
+        this.list = [];
+        await this.save(this.list);
+    }
+
     delete = async(id)=>{
         let arr = await this.getAll();
 
@@ -54,7 +71,7 @@ export default  class InchiriereRipo{
             for(let p  of arr){
                 if(p.id == id){
                     let filter = arr.filter((e)=> e.id != id);
-                    await save(filter);
+                    await this.save(filter);
                 }
             }
         }else{
@@ -78,7 +95,7 @@ export default  class InchiriereRipo{
 
         return new Promise((resolve,reject)=>{
 
-            fs.writeFile('../DB/inchiriereDB.json',JSON.stringify(data,null,2),(err)=>{
+            fs.writeFile('./DB/inchiriereDB.json',JSON.stringify(data,null,2),(err)=>{
                 if(err){
                     reject(err);
                 }else{
